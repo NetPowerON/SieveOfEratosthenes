@@ -10,6 +10,19 @@ namespace SieveOfRatosthenesPrimeNumberCalc
     {
         static void Main( string[ ] args )
         {
+            CountPrimeNumbers( );
+
+            DisplayPrimeNumbers( );
+        }
+
+        private static void DisplayPrimeNumbers( )
+        {
+            throw new NotImplementedException( );
+        }
+
+        private static void CountPrimeNumbers( )
+        {
+            throw new NotImplementedException( );
         }
     }
 }
