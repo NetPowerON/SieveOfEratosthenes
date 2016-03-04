@@ -8,23 +8,30 @@ namespace PrimeCalc
 {
     public class PrimeNumberUtility
     {
-        private     int                         _maxPrime;
         private     int                         _rootPrimeExtra;
-        private     PrimeNumberSieve            _seive                      = null;
+        private     PrimeNumberSieve            _sieve                      = null;
+        private     bool                        _sieveInitialized           = false;
 
         internal PrimeNumberSieve Seive
         {
             get
             {
-                return _seive;
+                return _sieve;
             }
         }
 
-        public PrimeNumberUtility( int maxPrime = 100000000 ) // 1 Million
+        public int MaxSearchNumber
         {
-            _maxPrime = maxPrime;
+            get
+            {
+                return _sieve.MaxSearchNumber;
+            }
+        }
+
+        public PrimeNumberUtility( int maxPrime = 100000000 ) // 100 Million
+        {
             _rootPrimeExtra = ( int )Math.Sqrt( maxPrime );
-            _seive = new PrimeNumberSieve( maxPrime );
+            _sieve = new PrimeNumberSieve( maxPrime );
         }
 
         public int CountPrimes( )
@@ -33,10 +40,45 @@ namespace PrimeCalc
             {
                 CalculatePrimeOptimized( i );
             }
-            return _seive.GetPrimeCount( );
+            return _sieve.GetPrimeCount( );
         }
 
-        public bool CalculatePrimeOptimized( int number )
+        public IEnumerable< int > EnumeratePrimeNumberList( )
+        {
+            var _start = 3;
+            if ( _sieveInitialized == false )
+            {
+                for( int i = 3; i <= _rootPrimeExtra; i += 2 )
+                {
+                    if ( CalculatePrimeOptimized( i ) )
+                    {
+                        yield return i;
+                    }
+                }
+                _start = _rootPrimeExtra;
+            }
+            foreach ( var num in EnumeratePrimeFrom( 3 ) )
+            {
+                yield return num;
+            }
+        }
+
+        private IEnumerable< int > EnumeratePrimeFrom( int start )
+        {
+            if ( ( start & 1 ) == 0 )
+            {
+                ++start;
+            }
+            for ( int i = start; i < _sieve.MaxSearchNumber; i += 2 )
+            {
+                if ( _sieve.ValArray[ i ] == false )
+                {
+                    yield return i;
+                }
+            }
+        }
+
+        private bool CalculatePrimeOptimized( int number )
         {
             var maxCount =
                 number == 3
@@ -52,7 +94,8 @@ namespace PrimeCalc
                     return false;
                 }
             }
-            _seive.ClearMultiplier( number );
+            _sieveInitialized = true;
+            _sieve.ClearMultiplier( number );
             return true;
         }
     }

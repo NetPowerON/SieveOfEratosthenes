@@ -19,6 +19,14 @@ namespace PrimeCalc
             }
         }
 
+        public int MaxSearchNumber
+        {
+            get
+            {
+                return _maxSize;
+            }
+        }
+
         internal PrimeNumberSieve( int maxNumberSize )
         {
             _valArray = new bool[ maxNumberSize + 1 ];
