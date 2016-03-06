@@ -45,6 +45,7 @@ namespace PrimeCalc
 
         public IEnumerable< int > EnumeratePrimeNumberList( )
         {
+            yield return 2;
             var _start = 3;
             if ( _sieveInitialized == false )
             {
@@ -57,7 +58,7 @@ namespace PrimeCalc
                 }
                 _start = _rootPrimeExtra;
             }
-            foreach ( var num in EnumeratePrimeFrom( 3 ) )
+            foreach ( var num in EnumeratePrimeFrom( _start ) )
             {
                 yield return num;
             }
@@ -65,6 +66,7 @@ namespace PrimeCalc
 
         private IEnumerable< int > EnumeratePrimeFrom( int start )
         {
+            // If the number is even make it NOT even. There are no even primes besides 2. The Sieve knows this too.
             if ( ( start & 1 ) == 0 )
             {
                 ++start;

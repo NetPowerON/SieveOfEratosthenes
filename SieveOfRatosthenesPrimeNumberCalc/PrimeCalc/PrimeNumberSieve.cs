@@ -34,6 +34,7 @@ namespace PrimeCalc
             _valArray[ 0 ] = true;
             _valArray[ 1 ] = true;
 
+            // By Default remove all even numbers.
             for ( int counter = 4; counter <= maxNumberSize; counter += 2 )
             {
                 _valArray[ counter ] = true;
