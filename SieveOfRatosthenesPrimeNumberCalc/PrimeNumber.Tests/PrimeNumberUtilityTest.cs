@@ -13,6 +13,20 @@ namespace PrimeNumber.Tests
     public class PrimeNumberUtilityTest
     {
         [Fact]
+        public void TestPrimeChecker( )
+        {
+            Assert.False( CheckIsPrime( 1 ) );
+            Assert.False( CheckIsPrime( 0 ) );
+            Assert.False( CheckIsPrime( -1 ) );
+            Assert.False( CheckIsPrime( -1000 ) );
+            Assert.False( CheckIsPrime( -3 ) );
+            Assert.True( CheckIsPrime( 2 ) );
+            Assert.True( CheckIsPrime( 3 ) );
+            Assert.True( CheckIsPrime( 5 ) );
+            Assert.True( CheckIsPrime( 7 ) );
+            Assert.True( CheckIsPrime( 7919 ) );
+        }
+        [Fact]
         public void CheckPrimes1000( )
         {
             var primeUtil = new PrimeNumberUtility( 1000 );

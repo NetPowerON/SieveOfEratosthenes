@@ -10,11 +10,15 @@ namespace PrimeNumber.Tests.Utility
     {
         public static bool CheckIsPrime( int num )
         {
-            if ( num == 2 )
+            if ( num <= 1 )
+            {
+                return false;
+            }
+            else if ( num == 2 )
             {
                 return true;
             }
-            if ( ( num & 1 ) == 0 )
+            else if ( ( num & 1 ) == 0 )
             {
                 return false;
             }
