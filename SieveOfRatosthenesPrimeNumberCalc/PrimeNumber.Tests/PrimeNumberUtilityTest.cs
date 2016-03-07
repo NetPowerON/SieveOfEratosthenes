@@ -31,5 +31,15 @@ namespace PrimeNumber.Tests
                 Assert.True( CheckIsPrime( primeNumber ) );
             }
         }
+
+        [Fact]
+        public void CheckPrimes( )
+        {
+            var primeUtil = new PrimeNumberUtility( );
+            foreach ( var primeNumber in primeUtil.EnumeratePrimeNumberList( ) )
+            {
+                Assert.True( CheckIsPrime( primeNumber ) );
+            }
+        }
     }
 }
